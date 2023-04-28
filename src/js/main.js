@@ -1,2 +1,4 @@
-// eslint-disable-next-line no-console
-console.log('testing');
+import TextArea from './components/textArea';
+
+// eslint-disable-next-line no-new
+new TextArea(20, 100, 'Ваш комментарий...');
