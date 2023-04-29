@@ -1,4 +1,5 @@
-import createFromTemplate from '../functions/createFromTemplate';
+import createFromTemplate from '../../functions/createFromTemplate';
+import './style.scss';
 
 class TextArea {
   constructor(rows = 30, cols = 30, placeholder = '') {

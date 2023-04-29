@@ -1,0 +1,73 @@
+.keyboard {
+
+}
+
+.buttons-list {
+  width: 875px;
+  margin: 0 auto;
+  padding: 10px;
+  background: #aaa9ad;
+  border-radius: 10px;
+
+  &__button {
+    border: none;
+    cursor: pointer;
+    position: relative;
+    height: 50px;
+    min-width: 50px;
+    margin-right: 5px;
+    margin-bottom: 7px;
+    padding: 0;
+    border-radius: 7px;
+    background: #000;
+    font-size: 25px;
+    line-height: 100%;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+    transition: background-color .3s ease-in-out;
+
+    &:hover {
+      background-color: steelblue;
+    }
+  }
+}
+
+#Backspace {
+  width: 155px;
+}
+
+#Tab {
+  width: 100px;
+}
+
+#CapsLock {
+  width: 100px;
+}
+
+#Enter {
+  width: 160px;
+}
+
+#ShiftLeft {
+  width: 130px;
+}
+
+#ShiftRight {
+  width: 185px;
+}
+
+#ControlLeft,
+#ControlRight {
+  width: 75px;
+}
+
+#Space {
+  width: 380px;
+}
+
+.active {
+  transform: translate(.75px, .75px);
+  background-color: steelblue;
+}

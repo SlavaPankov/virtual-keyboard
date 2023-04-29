@@ -376,7 +376,7 @@ const keys = [
     shiftKeyRu: ',',
   },
   {
-    code: '',
+    code: 'ShiftRight',
     key: 'Shift',
     shiftKeyEN: '',
     keyRu: '',
@@ -386,14 +386,6 @@ const keys = [
   {
     code: 'ControlLeft',
     key: 'Ctrl',
-    shiftKeyEN: '',
-    keyRu: '',
-    shiftKeyRu: '',
-    mode: 'additional',
-  },
-  {
-    code: 'MetaLeft',
-    key: 'Win',
     shiftKeyEN: '',
     keyRu: '',
     shiftKeyRu: '',
