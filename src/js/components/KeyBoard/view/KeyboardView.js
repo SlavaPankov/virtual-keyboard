@@ -42,6 +42,8 @@ class KeyboardView {
   }
 
   displayButtons(array, arrayValues) {
+    this.keyboard.querySelector('.buttons-list').innerHTML = '';
+
     this.createButtons(array, arrayValues).forEach((button) => {
       this.keyboard.querySelector('.buttons-list').append(button);
     });
@@ -50,11 +52,30 @@ class KeyboardView {
   bindHandleButtonsClick(handler) {
     this.keyboard.querySelectorAll('.buttons-list__button').forEach((button) => {
       if (!button.dataset.mode) {
-        button.addEventListener('click', (evt) => {
+        button.addEventListener('mousedown', (evt) => {
           handler(this.area, evt.target.textContent.trim());
+          evt.target.classList.add('active');
+        });
+
+        button.addEventListener('mouseup', (evt) => {
+          evt.target.classList.remove('active');
         });
       }
     });
+  }
+
+  bindCapsClick(handler) {
+    this.keyboard.querySelector('#CapsLock').addEventListener('click', () => {
+      handler();
+    });
+  }
+
+  addActiveClass(el) {
+    el.classList.add('active');
+  }
+
+  removeActiveClass(el) {
+    el.classList.remove('active');
   }
 }
 

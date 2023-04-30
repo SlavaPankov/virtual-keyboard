@@ -18,6 +18,23 @@ class KeyboardModel {
   getValueByKey(key) {
     return this.data.map((item) => (item.mode ? item.mode === 'additional' && item.key : item[key]));
   }
+
+  updateDataValues() {
+    const currentKeys = this.language ? this.ruKeys : this.engKeys;
+
+    if (this.capsed) {
+      // eslint-disable-next-line max-len
+      this.dataValues = this.dataValues.map((item) => (item.length === 1 ? item.toUpperCase() : item));
+    } else {
+      // eslint-disable-next-line max-len
+      this.dataValues = this.dataValues.map((item) => (item.length === 1 ? item.toLowerCase() : item));
+    }
+  }
+
+  changeCapsed() {
+    this.capsed = !this.capsed;
+    this.updateDataValues();
+  }
 }
 
 export default KeyboardModel;

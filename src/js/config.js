@@ -198,6 +198,14 @@ const keys = [
     shiftKeyRu: '/',
   },
   {
+    code: 'Delete',
+    key: 'Del',
+    shiftKeyEN: '',
+    keyRu: '',
+    shiftKeyRu: '',
+    mode: 'additional',
+  },
+  {
     code: 'CapsLock',
     key: 'Caps',
     shiftKeyEN: '',

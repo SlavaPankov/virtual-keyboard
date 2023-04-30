@@ -1,4 +1,5 @@
 import TextArea from './components/TextArea/TextArea';
+// eslint-disable-next-line import/no-named-as-default
 import KeyboardController from './components/KeyBoard/controller/KeyboardController';
 import KeyboardModel from './components/KeyBoard/model/KeyboardModel';
 import KeyboardView from './components/KeyBoard/view/KeyboardView';
