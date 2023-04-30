@@ -432,7 +432,7 @@ const keys = [
     mode: 'additional',
   },
   {
-    code: 'ArrowTop',
+    code: 'ArrowUp',
     key: '▲',
     shiftKeyEN: '▲',
     keyRu: '▲',
