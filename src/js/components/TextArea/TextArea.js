@@ -2,9 +2,10 @@ import createFromTemplate from '../../functions/createFromTemplate';
 import './style.scss';
 
 class TextArea {
-  constructor(rows = 30, cols = 30, placeholder = '') {
+  constructor(rows = 30, cols = 30, placeholder = '', resize = false) {
     this.rows = rows;
     this.cols = cols;
+    this.resize = resize;
     this.placeholder = placeholder;
 
     this.init();
@@ -14,7 +15,7 @@ class TextArea {
     const template = `
       <section class="comment">
         <form class="comment__form" action="">
-          <textarea class="comment__area" 
+          <textarea class='comment__area ${this.resize ? '' : 'no-resize'}'
                     name="comment" 
                     id="comment" 
                     cols="${this.cols}" 
