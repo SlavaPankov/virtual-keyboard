@@ -107,13 +107,6 @@ const keys = [
     mode: 'additional',
   },
   {
-    code: 'keyQ',
-    key: 'q',
-    shiftKeyEN: 'Q',
-    keyRu: 'й',
-    shiftKeyRu: 'Й',
-  },
-  {
     code: 'KeyQ',
     key: 'q',
     shiftKeyEN: 'Q',
