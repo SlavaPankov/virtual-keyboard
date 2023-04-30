@@ -66,7 +66,12 @@ class KeyboardController {
 
   // eslint-disable-next-line class-methods-use-this
   handleButtonClick = (value) => {
-    this.view.area.value += value;
+    const selectionStart = this.view.area.selectionStart;
+    const firstPartStr = this.view.area.value.slice(0, selectionStart);
+    const secondPartStr = this.view.area.value.slice(selectionStart, this.view.area.value.length);
+
+    this.view.area.value = firstPartStr + value + secondPartStr;
+    this.view.area.setSelectionRange(selectionStart + 1, selectionStart + 1);
   }
 
   handleCapsClick = () => {
