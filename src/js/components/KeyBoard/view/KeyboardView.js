@@ -21,6 +21,7 @@ class KeyboardView {
 
   displayKeyboard() {
     this.container.append(this.keyboard);
+    this.area.focus();
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -41,7 +42,6 @@ class KeyboardView {
   }
 
   displayButtons(array, arrayValues) {
-    this.area.focus();
     this.keyboard.querySelector('.buttons-list').innerHTML = '';
 
     this.createButtons(array, arrayValues).forEach((button) => {
@@ -53,11 +53,12 @@ class KeyboardView {
     this.keyboard.querySelectorAll('.buttons-list__button').forEach((button) => {
       if (!button.dataset.mode) {
         button.addEventListener('mousedown', (evt) => {
-          handler(this.area, evt.target.textContent.trim());
+          handler(evt.target.textContent.trim());
           this.addActiveClass(evt.target);
         });
 
         button.addEventListener('mouseup', (evt) => {
+          this.area.focus();
           this.removeActiveClass(evt.target);
         });
       }
@@ -66,6 +67,7 @@ class KeyboardView {
 
   bindCapsClick(handler) {
     this.keyboard.querySelector('#CapsLock').addEventListener('click', () => {
+      this.area.focus();
       handler();
     });
   }
@@ -79,8 +81,16 @@ class KeyboardView {
       });
 
       button.addEventListener('mouseup', () => {
+        this.area.focus();
         handler();
       });
+    });
+  }
+
+  bindBackspaceClick(handler) {
+    this.keyboard.querySelector('#Backspace').addEventListener('click', () => {
+      this.area.focus();
+      handler();
     });
   }
 
