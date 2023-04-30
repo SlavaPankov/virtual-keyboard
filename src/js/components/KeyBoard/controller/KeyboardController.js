@@ -18,6 +18,7 @@ class KeyboardController {
     this.view.bindShiftLink(this.handleShiftClick);
     this.view.bindBackspaceClick(this.handleBackspaceClick);
     this.view.bindDeleteClick(this.handleDeleteClick);
+    this.view.bindEnterClick(this.handleEnterClick);
 
     if (this.model.capsed) {
       this.view.addActiveClass(this.view.keyboard.querySelector('#CapsLock'));
@@ -70,6 +71,10 @@ class KeyboardController {
     } else {
       this.view.area.setSelectionRange(selectionStart, selectionStart);
     }
+  }
+
+  handleEnterClick = () => {
+    this.view.area.value += '\n';
   }
 }
 
