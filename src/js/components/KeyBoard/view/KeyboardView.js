@@ -94,6 +94,13 @@ class KeyboardView {
     });
   }
 
+  bindDeleteClick(handler) {
+    this.keyboard.querySelector('#Delete').addEventListener('click', () => {
+      this.area.focus();
+      handler();
+    });
+  }
+
   // eslint-disable-next-line class-methods-use-this
   addActiveClass(el) {
     el.classList.add('active');

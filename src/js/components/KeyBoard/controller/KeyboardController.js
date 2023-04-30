@@ -17,6 +17,7 @@ class KeyboardController {
     this.view.bindCapsClick(this.handleCapsClick);
     this.view.bindShiftLink(this.handleShiftClick);
     this.view.bindBackspaceClick(this.handleBackspaceClick);
+    this.view.bindDeleteClick(this.handleDeleteClick);
 
     if (this.model.capsed) {
       this.view.addActiveClass(this.view.keyboard.querySelector('#CapsLock'));
@@ -52,6 +53,20 @@ class KeyboardController {
     this.view.area.value = arrFromStr.join('');
     if (selectionStart === selectionEnd) {
       this.view.area.setSelectionRange(selectionStart - 1, selectionStart - 1);
+    } else {
+      this.view.area.setSelectionRange(selectionStart, selectionStart);
+    }
+  }
+
+  handleDeleteClick = () => {
+    const selectionStart = this.view.area.selectionStart;
+    const selectionEnd = this.view.area.selectionEnd;
+    const arrFromStr = this.view.area.value.split('');
+
+    arrFromStr.splice(selectionStart, selectionEnd - selectionStart === 0 ? 1 : selectionEnd - selectionStart);
+    this.view.area.value = arrFromStr.join('');
+    if (selectionStart === selectionEnd) {
+      this.view.area.setSelectionRange(selectionStart, selectionStart);
     } else {
       this.view.area.setSelectionRange(selectionStart, selectionStart);
     }
