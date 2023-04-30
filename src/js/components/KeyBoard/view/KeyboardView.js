@@ -135,6 +135,22 @@ class KeyboardView {
     });
   }
 
+  bindArrowClick(handler) {
+    const arrows = [
+      this.getKeyBiId('ArrowLeft'),
+      this.getKeyBiId('ArrowUp'),
+      this.getKeyBiId('ArrowRight'),
+      this.getKeyBiId('ArrowDown'),
+    ];
+
+    arrows.forEach((arrow) => {
+      arrow.addEventListener('click', (evt) => {
+        this.area.focus();
+        handler(evt.target);
+      });
+    });
+  }
+
   getKeyBiId(id) {
     return this.keyboard.querySelector(`#${id}`);
   }
