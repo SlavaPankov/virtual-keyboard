@@ -2,12 +2,18 @@ class KeyboardController {
   constructor(model, view) {
     this.model = model;
     this.view = view;
-    this.view.displayKeyboard();
     this.initialState();
+    this.view.bindHandleButtonsClick(this.handleButtonClick);
   }
 
   initialState() {
-    return this.view.displayButtons(this.model.data, this.model.dataValues);
+    this.view.displayKeyboard();
+    this.view.displayButtons(this.model.data, this.model.dataValues);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  handleButtonClick(area, value) {
+    area.value += value;
   }
 }
 

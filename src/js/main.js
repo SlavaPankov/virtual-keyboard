@@ -6,4 +6,4 @@ import KeyboardView from './components/KeyBoard/view/KeyboardView';
 // eslint-disable-next-line no-new
 new TextArea(20, 100, 'Ваш комментарий...');
 // eslint-disable-next-line no-new
-new KeyboardController(new KeyboardModel(), new KeyboardView());
+new KeyboardController(new KeyboardModel(), new KeyboardView('.comment__area'));
