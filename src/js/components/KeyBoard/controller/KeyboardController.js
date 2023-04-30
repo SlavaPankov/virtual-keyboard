@@ -15,6 +15,7 @@ class KeyboardController {
     this.view.displayButtons(this.model.data, this.model.dataValues);
     this.view.bindHandleButtonsClick(this.handleButtonClick);
     this.view.bindCapsClick(this.handleCapsClick);
+    this.view.bindShiftLink(this.handleShiftClick);
 
     if (this.model.capsed) {
       this.view.addActiveClass(this.view.keyboard.querySelector('#CapsLock'));
@@ -29,6 +30,12 @@ class KeyboardController {
   // eslint-disable-next-line class-methods-use-this
   handleCapsClick = () => {
     this.model.changeCapsed();
+
+    this.initialButtonsState();
+  }
+
+  handleShiftClick = () => {
+    this.model.changeShifted();
 
     this.initialButtonsState();
   }

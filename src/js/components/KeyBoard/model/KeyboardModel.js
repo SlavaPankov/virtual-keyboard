@@ -22,17 +22,28 @@ class KeyboardModel {
   updateDataValues() {
     const currentKeys = this.language ? this.ruKeys : this.engKeys;
 
-    if (this.capsed) {
+    if (this.capsed && !this.shifted) {
+      this.dataValues = this.getValueByKey(currentKeys[0]);
       // eslint-disable-next-line max-len
       this.dataValues = this.dataValues.map((item) => (item.length === 1 ? item.toUpperCase() : item));
-    } else {
+    } else if (!this.capsed && this.shifted) {
+      this.dataValues = this.getValueByKey(currentKeys[1]);
+    } else if (this.capsed && this.shifted) {
+      this.dataValues = this.getValueByKey(currentKeys[1]);
       // eslint-disable-next-line max-len
       this.dataValues = this.dataValues.map((item) => (item.length === 1 ? item.toLowerCase() : item));
+    } else {
+      this.dataValues = this.getValueByKey(currentKeys[0]);
     }
   }
 
   changeCapsed() {
     this.capsed = !this.capsed;
+    this.updateDataValues();
+  }
+
+  changeShifted() {
+    this.shifted = !this.shifted;
     this.updateDataValues();
   }
 }

@@ -6,7 +6,6 @@ class KeyboardView {
     this.container = document.body;
     this.area = document.querySelector(`${area}`);
     this.keyboard = this.createKeyboard();
-    this.area.focus();
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -42,6 +41,7 @@ class KeyboardView {
   }
 
   displayButtons(array, arrayValues) {
+    this.area.focus();
     this.keyboard.querySelector('.buttons-list').innerHTML = '';
 
     this.createButtons(array, arrayValues).forEach((button) => {
@@ -54,11 +54,11 @@ class KeyboardView {
       if (!button.dataset.mode) {
         button.addEventListener('mousedown', (evt) => {
           handler(this.area, evt.target.textContent.trim());
-          evt.target.classList.add('active');
+          this.addActiveClass(evt.target);
         });
 
         button.addEventListener('mouseup', (evt) => {
-          evt.target.classList.remove('active');
+          this.removeActiveClass(evt.target);
         });
       }
     });
@@ -70,10 +70,26 @@ class KeyboardView {
     });
   }
 
+  bindShiftLink(handler) {
+    const shiftButtons = [this.keyboard.querySelector('#ShiftLeft'), this.keyboard.querySelector('#ShiftRight')];
+
+    shiftButtons.forEach((button) => {
+      button.addEventListener('mousedown', () => {
+        handler();
+      });
+
+      button.addEventListener('mouseup', () => {
+        handler();
+      });
+    });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
   addActiveClass(el) {
     el.classList.add('active');
   }
 
+  // eslint-disable-next-line class-methods-use-this
   removeActiveClass(el) {
     el.classList.remove('active');
   }
