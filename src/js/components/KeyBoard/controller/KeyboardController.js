@@ -9,6 +9,40 @@ class KeyboardController {
   initialState() {
     this.view.displayKeyboard();
     this.initialButtonsState();
+
+    document.addEventListener('keydown', (evt) => {
+      if (evt.code !== 'CapsLock') {
+        this.view.addActiveClass(this.view.getKeyBiId(evt.code));
+      }
+
+      if (evt.code === 'CapsLock') {
+        this.view.addActiveClass(this.view.getKeyBiId(evt.code));
+        this.handleCapsClick();
+      }
+
+      if (evt.code === 'AltLeft') {
+        this.view.altClick = true;
+      }
+
+      if (evt.code === 'ShiftLeft') {
+        this.handleShiftClick(evt.type);
+      }
+
+      if (evt.code === 'Tab') {
+        evt.preventDefault();
+        this.handleTabClick();
+      }
+    });
+
+    document.addEventListener('keyup', (evt) => {
+      if (evt.code !== 'CapsLock') {
+        this.view.removeActiveClass(this.view.getKeyBiId(evt.code));
+      }
+
+      if (evt.code === 'ShiftLeft') {
+        this.handleShiftClick(evt.type);
+      }
+    });
   }
 
   initialButtonsState() {
@@ -41,7 +75,7 @@ class KeyboardController {
   }
 
   handleShiftClick = (eventType) => {
-    if (this.view.altClick && eventType === 'mousedown') {
+    if (this.view.altClick && (eventType === 'mousedown' || eventType === 'keydown')) {
       this.model.changeLanguage();
       this.model.changeShifted();
       this.initialButtonsState();
@@ -49,6 +83,7 @@ class KeyboardController {
       this.model.changeShifted();
       this.initialButtonsState();
     }
+
   }
 
   handleBackspaceClick = () => {
@@ -56,11 +91,14 @@ class KeyboardController {
     const selectionEnd = this.view.area.selectionEnd;
     const arrFromStr = this.view.area.value.split('');
 
-    arrFromStr.splice(selectionStart - 1, selectionEnd - selectionStart === 0 ? 1 : selectionEnd - selectionStart);
-    this.view.area.value = arrFromStr.join('');
+
     if (selectionStart === selectionEnd) {
+      arrFromStr.splice(selectionStart - 1, 1);
+      this.view.area.value = arrFromStr.join('');
       this.view.area.setSelectionRange(selectionStart - 1, selectionStart - 1);
     } else {
+      arrFromStr.splice(selectionStart, selectionEnd - selectionStart);
+      this.view.area.value = arrFromStr.join('');
       this.view.area.setSelectionRange(selectionStart, selectionStart);
     }
   }
@@ -98,7 +136,7 @@ class KeyboardController {
     const secondPartStr = this.view.area.value.slice(selectionStart, this.view.area.value.length);
 
     this.view.area.value = firstPartStr + '  ' + secondPartStr;
-    this.view.area.setSelectionRange(selectionStart + 1, selectionStart + 1);
+    this.view.area.setSelectionRange(selectionStart + 2, selectionStart + 2);
   }
 
   handleAltClick = () => {
