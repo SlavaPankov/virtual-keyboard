@@ -19,6 +19,7 @@ class KeyboardController {
     this.view.bindBackspaceClick(this.handleBackspaceClick);
     this.view.bindDeleteClick(this.handleDeleteClick);
     this.view.bindEnterClick(this.handleEnterClick);
+    this.view.bindSpaceClick(this.handleSpaceClick);
 
     if (this.model.capsed) {
       this.view.addActiveClass(this.view.keyboard.querySelector('#CapsLock'));
@@ -27,12 +28,9 @@ class KeyboardController {
 
   // eslint-disable-next-line class-methods-use-this
   handleButtonClick = (value) => {
-    this.view.area.focus();
     this.view.area.value += value;
-
   }
 
-  // eslint-disable-next-line class-methods-use-this
   handleCapsClick = () => {
     this.model.changeCapsed();
 
@@ -71,6 +69,15 @@ class KeyboardController {
     } else {
       this.view.area.setSelectionRange(selectionStart, selectionStart);
     }
+  }
+
+  handleSpaceClick = () => {
+    const selectionStart = this.view.area.selectionStart;
+    const firstPartStr = this.view.area.value.slice(0, selectionStart);
+    const secondPartStr = this.view.area.value.slice(selectionStart, this.view.area.value.length);
+
+    this.view.area.value = firstPartStr + ' ' + secondPartStr;
+    this.view.area.setSelectionRange(selectionStart + 1, selectionStart + 1);
   }
 
   handleEnterClick = () => {

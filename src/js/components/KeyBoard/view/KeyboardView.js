@@ -108,6 +108,13 @@ class KeyboardView {
     });
   }
 
+  bindSpaceClick(handler) {
+    this.keyboard.querySelector('#Space').addEventListener('click', () => {
+      this.area.focus();
+      handler();
+    });
+  }
+
   // eslint-disable-next-line class-methods-use-this
   addActiveClass(el) {
     el.classList.add('active');
