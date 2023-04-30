@@ -15,11 +15,14 @@ class KeyboardController {
     this.view.displayButtons(this.model.data, this.model.dataValues);
     this.view.bindHandleButtonsClick(this.handleButtonClick);
     this.view.bindCapsClick(this.handleCapsClick);
-    this.view.bindShiftLink(this.handleShiftClick);
+    this.view.bindShiftClick(this.handleShiftClick);
     this.view.bindBackspaceClick(this.handleBackspaceClick);
     this.view.bindDeleteClick(this.handleDeleteClick);
     this.view.bindEnterClick(this.handleEnterClick);
     this.view.bindSpaceClick(this.handleSpaceClick);
+    this.view.bindTabClick(this.handleTabClick);
+    this.view.bindAltClick(this.handleAltClick);
+    this.view.bindCtrlClick(this.handleCtrlClick);
 
     if (this.model.capsed) {
       this.view.addActiveClass(this.view.keyboard.querySelector('#CapsLock'));
@@ -37,10 +40,15 @@ class KeyboardController {
     this.initialButtonsState();
   }
 
-  handleShiftClick = () => {
-    this.model.changeShifted();
-
-    this.initialButtonsState();
+  handleShiftClick = (eventType) => {
+    if (this.view.altClick && eventType === 'mousedown') {
+      this.model.changeLanguage();
+      this.model.changeShifted();
+      this.initialButtonsState();
+    } else {
+      this.model.changeShifted();
+      this.initialButtonsState();
+    }
   }
 
   handleBackspaceClick = () => {
@@ -82,6 +90,27 @@ class KeyboardController {
 
   handleEnterClick = () => {
     this.view.area.value += '\n';
+  }
+
+  handleTabClick = () => {
+    const selectionStart = this.view.area.selectionStart;
+    const firstPartStr = this.view.area.value.slice(0, selectionStart);
+    const secondPartStr = this.view.area.value.slice(selectionStart, this.view.area.value.length);
+
+    this.view.area.value = firstPartStr + '  ' + secondPartStr;
+    this.view.area.setSelectionRange(selectionStart + 1, selectionStart + 1);
+  }
+
+  handleAltClick = () => {
+    this.view.altClick = true;
+  }
+
+  handleCtrlClick = () => {
+    if (this.view.altClick) {
+      this.model.changeLanguage();
+      this.initialButtonsState();
+      this.view.altClick = false;
+    }
   }
 }
 

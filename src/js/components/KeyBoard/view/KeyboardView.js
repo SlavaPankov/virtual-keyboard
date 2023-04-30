@@ -6,6 +6,7 @@ class KeyboardView {
     this.container = document.body;
     this.area = document.querySelector(`${area}`);
     this.keyboard = this.createKeyboard();
+    this.altClick = false;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -66,18 +67,18 @@ class KeyboardView {
   }
 
   bindCapsClick(handler) {
-    this.keyboard.querySelector('#CapsLock').addEventListener('click', () => {
+    this.getKeyBiId('CapsLock').addEventListener('click', () => {
       this.area.focus();
       handler();
     });
   }
 
-  bindShiftLink(handler) {
-    const shiftButtons = [this.keyboard.querySelector('#ShiftLeft'), this.keyboard.querySelector('#ShiftRight')];
+  bindShiftClick(handler) {
+    const shiftButtons = [this.getKeyBiId('ShiftLeft'), this.getKeyBiId('ShiftRight')];
 
     shiftButtons.forEach((button) => {
-      button.addEventListener('mousedown', () => {
-        handler();
+      button.addEventListener('mousedown', (evt) => {
+        handler(evt.type);
       });
 
       button.addEventListener('mouseup', () => {
@@ -88,31 +89,54 @@ class KeyboardView {
   }
 
   bindBackspaceClick(handler) {
-    this.keyboard.querySelector('#Backspace').addEventListener('click', () => {
+    this.getKeyBiId('Backspace').addEventListener('click', () => {
       this.area.focus();
       handler();
     });
   }
 
   bindDeleteClick(handler) {
-    this.keyboard.querySelector('#Delete').addEventListener('click', () => {
+    this.getKeyBiId('Delete').addEventListener('click', () => {
       this.area.focus();
       handler();
     });
   }
 
   bindEnterClick(handler) {
-    this.keyboard.querySelector('#Enter').addEventListener('click', () => {
+    this.getKeyBiId('Enter').addEventListener('click', () => {
       this.area.focus();
       handler();
     });
   }
 
   bindSpaceClick(handler) {
-    this.keyboard.querySelector('#Space').addEventListener('click', () => {
+    this.getKeyBiId('Space').addEventListener('click', () => {
       this.area.focus();
       handler();
     });
+  }
+
+  bindTabClick(handler) {
+    this.getKeyBiId('Tab').addEventListener('click', () => {
+      this.area.focus();
+      handler();
+    });
+  }
+
+  bindAltClick(handler) {
+    this.getKeyBiId('AltLeft').addEventListener('click', () => {
+      handler();
+    });
+  }
+
+  bindCtrlClick(handler) {
+    this.getKeyBiId('ControlLeft').addEventListener('click', () => {
+      handler();
+    });
+  }
+
+  getKeyBiId(id) {
+    return this.keyboard.querySelector(`#${id}`);
   }
 
   // eslint-disable-next-line class-methods-use-this

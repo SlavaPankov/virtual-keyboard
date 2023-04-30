@@ -7,7 +7,7 @@ class KeyboardModel {
     this.ruKeys = ['keyRu', 'shiftKeyRu'];
     this.shifted = false;
     this.capsed = false;
-    this.language = localStorage.getItem('language') || false;
+    this.language = localStorage.getItem('language') ? JSON.parse(localStorage.getItem('language')) : false;
     this.dataValues = this.language ? this.getValueByKey('keyRu') : this.getValueByKey('key');
   }
 
@@ -44,6 +44,12 @@ class KeyboardModel {
 
   changeShifted() {
     this.shifted = !this.shifted;
+    this.updateDataValues();
+  }
+
+  changeLanguage() {
+    this.language = !this.language;
+    this.saveLanguageToLS();
     this.updateDataValues();
   }
 }
