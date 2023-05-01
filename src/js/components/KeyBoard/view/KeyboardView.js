@@ -73,7 +73,7 @@ class KeyboardView {
           handler(evt.target.textContent.trim());
         });
 
-        button.addEventListener('mouseup', (evt) => {
+        button.addEventListener('mouseup', () => {
           this.area.focus();
         });
       }

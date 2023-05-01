@@ -25,7 +25,8 @@ class KeyboardController {
         this.handleCapsClick();
       }
 
-      if (evt.code === 'AltLeft') {
+      if (evt.altKey) {
+        evt.preventDefault();
         this.view.altClick = true;
       }
 
@@ -51,6 +52,7 @@ class KeyboardController {
 
       if (evt.code === 'ShiftLeft') {
         this.handleShiftClick(evt.type);
+        this.view.removeActiveClass(this.view.getKeyBiId(evt.code));
       }
     });
   }
