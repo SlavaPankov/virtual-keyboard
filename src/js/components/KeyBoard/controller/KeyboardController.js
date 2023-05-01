@@ -35,6 +35,11 @@ class KeyboardController {
         this.view.addActiveClass(this.view.getKeyBiId(evt.code));
       }
 
+      if (evt.code === 'ControlLeft' || evt.code === 'ControlRight') {
+        this.handleCtrlClick();
+        this.view.addActiveClass(this.view.getKeyBiId(evt.code));
+      }
+
       if (evt.code === 'Tab') {
         evt.preventDefault();
         this.handleTabClick();
@@ -52,6 +57,10 @@ class KeyboardController {
 
       if (evt.code === 'ShiftLeft') {
         this.handleShiftClick(evt.type);
+        this.view.removeActiveClass(this.view.getKeyBiId(evt.code));
+      }
+
+      if (evt.code === 'ControlLeft' || evt.code === 'ControlRight') {
         this.view.removeActiveClass(this.view.getKeyBiId(evt.code));
       }
     });
