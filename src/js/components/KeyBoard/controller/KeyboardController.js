@@ -11,6 +11,10 @@ class KeyboardController {
     this.initialButtonsState();
 
     document.addEventListener('keydown', (evt) => {
+      if (!this.model.data.find((item) => item.code === evt.code)) {
+        return;
+      }
+
       if (evt.code !== 'CapsLock') {
         this.view.addActiveClass(this.view.getKeyBiId(evt.code));
       }
@@ -26,6 +30,7 @@ class KeyboardController {
 
       if (evt.code === 'ShiftLeft') {
         this.handleShiftClick(evt.type);
+        this.view.addActiveClass(this.view.getKeyBiId(evt.code));
       }
 
       if (evt.code === 'Tab') {
@@ -35,6 +40,10 @@ class KeyboardController {
     });
 
     document.addEventListener('keyup', (evt) => {
+      if (!this.model.data.find((item) => item.code === evt.code)) {
+        return;
+      }
+
       if (evt.code !== 'CapsLock') {
         this.view.removeActiveClass(this.view.getKeyBiId(evt.code));
       }
