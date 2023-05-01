@@ -9,6 +9,7 @@ class KeyboardController {
   initialState() {
     this.view.displayKeyboard();
     this.initialButtonsState();
+    this.view.displayNotification();
 
     document.addEventListener('keydown', (evt) => {
       if (!this.model.data.find((item) => item.code === evt.code)) {

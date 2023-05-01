@@ -50,6 +50,22 @@ class KeyboardView {
     });
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  createNotification() {
+    const template = `
+      <div class="notification">
+        <p>Клавиатура создана на основе системы Windows 11</p>
+        <p>Для смены языка используется сочетание левых Alt+Shift или Alt+Ctrl</p>
+      </div>
+    `;
+
+    return createFromTemplate(template);
+  }
+
+  displayNotification() {
+    this.container.append(this.createNotification());
+  }
+
   bindHandleButtonsClick(handler) {
     this.keyboard.querySelectorAll('.buttons-list__button').forEach((button) => {
       if (!button.dataset.mode) {
