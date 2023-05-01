@@ -54,8 +54,8 @@ class KeyboardView {
   createNotification() {
     const template = `
       <div class="notification">
-        <p>Клавиатура создана на основе системы Windows 11</p>
-        <p>Для смены языка используется сочетание левых Alt+Shift или Alt+Ctrl</p>
+        <p class="notification__paragraph">Клавиатура создана на основе системы Windows 11</p>
+        <p class="notification__paragraph">Для смены языка используется сочетание левых Alt+Shift или Alt+Ctrl</p>
       </div>
     `;
 
@@ -71,14 +71,20 @@ class KeyboardView {
       if (!button.dataset.mode) {
         button.addEventListener('mousedown', (evt) => {
           handler(evt.target.textContent.trim());
-          this.addActiveClass(evt.target);
         });
 
         button.addEventListener('mouseup', (evt) => {
           this.area.focus();
-          this.removeActiveClass(evt.target);
         });
       }
+
+      button.addEventListener('mousedown', (evt) => {
+        this.addActiveClass(evt.target);
+      });
+
+      button.addEventListener('mouseup', (evt) => {
+        this.removeActiveClass(evt.target);
+      });
     });
   }
 
